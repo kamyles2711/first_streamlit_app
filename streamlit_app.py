@@ -1,7 +1,7 @@
-import streamlit
+import streamlit as sl
 
-streamlit.title('My Parents New Healthy Diner')
+sl.title('My Parents New Healthy Diner')
 
-print('Omega 3 & Blueberry Oatmeal')
-print('Kale, Spinach & Rocket Smoothie')
-print('Hard-Boiled Free-Range Egg')
+sl.markdown('Omega 3 & Blueberry Oatmeal')
+sl.markdown('Kale, Spinach & Rocket Smoothie')
+sl.markdown('Hard-Boiled Free-Range Egg')
