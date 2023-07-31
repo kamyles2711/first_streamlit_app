@@ -23,6 +23,8 @@ fruits_to_show = fruit_list.loc[fruits_selected]
 sl.dataframe(fruits_to_show)
 
 #Display FruityVice API Response
+sl.header('Fruityvice Fruit Advice!')
+
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-sl.text(fruityvice_response)
+sl.text(fruityvice_response.json())
 
