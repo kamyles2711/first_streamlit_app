@@ -32,7 +32,7 @@ try:
  if not fruit_choice:
   sl.error('Please select a fruit to get information.')
  else:
-  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit choice)
+  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
   # Normalize Data
   fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
   # Put Data into DataFrame
