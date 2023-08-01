@@ -42,9 +42,7 @@ try:
 except URLError as e:
  sl.error()
 
-sl.stop()
 
-#Snowflake Connection
 sl.header("The fruit load list contains:")
 #Snowflake related functions: 
 def get_fruit_load_list():
@@ -54,6 +52,7 @@ def get_fruit_load_list():
 
 #Add button to load the fruit
 if sl.button('Get Fruit Load List'):
+ #Snowflake Connection
  my_cnx = snowflake.connector.connect(**sl.secrets["snowflake"])
  my data_rows = get_fruit_load_list()
  sl.dataframe(my_data_rows)
