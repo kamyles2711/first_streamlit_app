@@ -20,9 +20,9 @@ fruit_list = fruit_list.set_index('Fruit')
 fruits_selected = sl.multiselect("Pick some fruits:", list(fruit_list.index), ['Avocado','Strawberries'])
 fruits_to_show = fruit_list.loc[fruits_selected]
 
- 
 # Display the table on the page.
 sl.dataframe(fruits_to_show)
+
 
 #Function to display FruityVice API Response
 sl.header('Fruityvice Fruit Advice!')
@@ -57,9 +57,17 @@ if sl.button('Get Fruit Load List'):
  my_data_rows = get_fruit_load_list()
  sl.dataframe(my_data_rows)
 
-sl.stop() 
 
 #Allow user to add fruit to the list
-add_fruit = sl.text_input('What fruit would you like to add?','jackfuit')
-sl.write('Thanks for adding ', add_fruit)
+def insert_row_snowflake(new_fruit):
+  with my_cnx.cursor() as my_cur:
+   my_cur.execute("insert into fruit_load_list values ('from streamlit')")
+   return 'Thanks for adding ' + new_fruit
+
+add_fruit = sl.text_input('What fruit would you like to add?')
+if sl.button('Add a Fruit to the List'):
+ #Snowflake Connection
+ my_cnx = snowflake.connector.connect(**sl.secrets["snowflake"])
+ back_from_function = insert_rows_snowflake(add_fruit)
+ sl.text(back_from_function)
 
