@@ -24,19 +24,21 @@ fruits_to_show = fruit_list.loc[fruits_selected]
 # Display the table on the page.
 sl.dataframe(fruits_to_show)
 
-#Display FruityVice API Response
+#Function to display FruityVice API Response
 sl.header('Fruityvice Fruit Advice!')
+def get_fruityvice_data(this_fruit_):
+  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+  fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+  return fruityvice_normalized
+ 
 #New section to display fruityvice API response
 try:
  fruit_choice = sl.text_input('What fruit would you like information about?')
  if not fruit_choice:
   sl.error('Please select a fruit to get information.')
  else:
-  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-  # Normalize Data
-  fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
-  # Put Data into DataFrame
-  sl.dataframe(fruityvice_normalized)
+  back_from_function = get_fruityvice_data(fruit_choice)
+  sl.dataframe(back_from_function)
 except URLError as e:
  sl.error()
 
